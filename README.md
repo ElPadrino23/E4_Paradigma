@@ -34,9 +34,72 @@ por_calificacion          <- filter: nuevamnete filtra las series dejando unicam
        v
    Recomendaciones
 ```
-Cada paso es una lambda de orden superior, una funcion que recibe un parametro y regresa otra funcion. Estos patrones se llaman currificacion y vienen del calculo lambda (Church, 1941).
+Cada paso es una lambda de orden superior, una funcion que recibe un parametro y regresa otra funcion. Estos patrones se llaman currificacion y son del calculo lambda (Church, 1941)
 
 
 ### Lambdas definidas
+
+### Lambdas utilizadas
+
+- `por_genero(generos)`: filtra las series segun los generos seleccionados
+- `por_calificacion(minimo)`: filtra las series que cumplen con la calificacion minima
+- `ordenar`: ordena las series de mayor a menor calificacion
+- `formatear`: convierte cada serie en un formato de texto para mostrarla
+- `return`: regresa el resultado final después de aplicar todos los filtros y transformaciones
+
+### Lambdas utilizadas
+
+- `por_genero`: filtra las series segun los generos que fueron seleccionados
+- `por_calificacion`: filtra las series que cumplen con al menos la calificacion seleccionada 
+- `ordenar`: ordena las series de mayor a menor calificacion
+- `formatear`: convierte cada serie en un formato de texto
+- `return`: regresa el resultado final despues de aplicar todos los filtros 
+
+## Implementacion
+
+**Archivos:**
+- `series.csv` set con series en formato: (nombre, genero, calificacion, año)
+- `recomendador.py` todas las lambdas y el pipeline
+- `tests.py`  15 pruebas automatizadas
+
+**Para correr el programa:**
+```
+python recomendador.py
+```
+
+Ejemplo de uso:
+```
+Escribe los generos que te gustan separados por coma y despues la calificacion minima que aceptas
+
+Recomendaciones para: drama y horror con calificacion >= 8.5
+ - The Sopranos (1999) | drama | Calificacion: 9.2
+ - Dr House (2004) | drama | Calificacion: 8.7
+```
+
+**Las lambdas principales:**
+```
+por_genero       = lambda generos: (lambda series: list(filter(lambda s: s['genero'] in generos, series)))
+por_calificacion = lambda minimo:  (lambda series: list(filter(lambda s: s['calificacion'] >= minimo, series)))
+ordenar          = lambda series:  sorted(series, key=lambda s: s['calificacion'], reverse=True)
+formatear        = lambda series:  list(map(lambda s: f"{s['nombre']} ({s['año']}) | {s['genero']} | Calificacion: {s['calificacion']}", series))
+```
+
+La funcion `recomendar` las encadena en orden:
+```
+def recomendar(series, generos, minimo):
+    filtradas = por_genero(generos)(series)
+    filtradas = por_calificacion(minimo)(filtradas)
+    ordenadas = ordenar(filtradas)
+    return formatear(ordenadas)
+```
+
+
+
+## Pruebas
+
+**Para correr las pruebas:**
+```
+python tests.py
+```
 
 
