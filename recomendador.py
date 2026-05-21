@@ -37,8 +37,17 @@ por_calificacion = lambda minimo: (
     lambda series: list(filter(lambda s: s['calificacion'] >= minimo, series))
 )
 
-# Ordenar de mayor a menor
-ordenar = lambda series: sorted(series, key=lambda s: s['calificacion'], reverse=True)
+# Ordenar de mayor a menor con bubble sort por que es mi algoritmo de ordenamiento favorito
+def bubble_sort(series):
+    arr = series.copy()
+    n = len(arr)
+    for i in range(n):
+        for j in range(n - 1 - i):
+            if arr[j]['calificacion'] < arr[j + 1]['calificacion']:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+ordenar = bubble_sort
 
 # Convertir a texto
 formatear = lambda series: list(map(
