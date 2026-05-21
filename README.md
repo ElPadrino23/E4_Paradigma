@@ -93,13 +93,28 @@ def recomendar(series, generos, minimo):
     return formatear(ordenadas)
 ```
 
+## Analisis
+ 
+### Complejidad Temporal
+ 
+La velocidad del programa depende de cuantas series hay
+ 
+Cargar las series es O(n)
+Filtrar por genero es O(n)
+Filtrar por calificacion es O(n)
+Ordenar con bubble sort es O(n^2), que es la parte mas lenta
+Formatear es O(n)
 
+El paso complicado es ordenar ya que utilizando bubble sort O(n^2), los demas son rapidos, entonces todo el programa es O(n^2),
+  
+## Referencias
+ 
+- Abelson, H., y Sussman, G. J. (1996). *Structure and Interpretation of Computer Programs* (2nd ed.). MIT Press. https://mitpress.mit.edu/9780262510875/
 
-## Pruebas
+- Bratko, I. (2012). Prolog Programming for Artificial Intelligence (4th ed.). Addison-Wesley.
 
-**Para correr las pruebas:**
-```
-python tests.py
-```
+- Church, A. (1941). The Calculi of Lambda Conversion. Princeton University Press.
 
-
+- Python Software Foundation. (2024). Functional Programming HOWTO https://docs.python.org/3/howto/functional.html
+- Sterling, L., y Shapiro, E. (1994). *The Art of Prolog* (2nd ed.). MIT Press.
+ 
