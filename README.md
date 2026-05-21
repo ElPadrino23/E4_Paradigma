@@ -11,3 +11,32 @@ Ejemplos: `resultado = []` y luego `resultado.append())`, se utilizan funciones 
 Mi ejemplo favorito es por ejemplo en un caso hipotetico utilizar el output de un sort en una lista desordenada para facilitar un filter, ya teniendo las calificaciones ordenadas. 
 
 En Python las expresiones lambda son la implementacion directa de este concepto. Cada transformacion del pipeline es una lambda, una funcion pequena que recibe una entrada y regresa una salida y no modifica nada 
+
+## Modelo
+
+La solucion es el pipeline , los datos pasan por una secuencia de transformaciones donde cada paso es una funcion lambda.
+
+```
+Todos los series
+       |
+       v
+    por_genero              <- filter: Filtra las series por el genero escogido
+       |
+       v
+por_calificacion          <- filter: nuevamnete filtra las series dejando unicamente las que cumplen con calificacion >= 
+       |
+       v
+    ordenar                 <- sort: Ahora aplicamos un sort para ordenar de mayor a menor
+       |
+       v
+   convertir                 <- map: pasa de diccionario a string leible 
+       |
+       v
+   Recomendaciones
+```
+Cada paso es una lambda de orden superior, una funcion que recibe un parametro y regresa otra funcion. Estos patrones se llaman currificacion y vienen del calculo lambda (Church, 1941).
+
+
+### Lambdas definidas
+
+
