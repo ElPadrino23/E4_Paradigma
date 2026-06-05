@@ -9,7 +9,7 @@ from funcional import (
     recomendar
 )
 
-from orientada_objetos import Serie, Catalogo
+from oo import Serie, Catalogo
 
 
 class TestFuncional(unittest.TestCase):
